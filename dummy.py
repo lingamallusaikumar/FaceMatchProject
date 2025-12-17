@@ -104,6 +104,7 @@ def camera_loop_tk():
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         img = Image.fromarray(img)
         imgtk = ImageTk.PhotoImage(image=img)
+        
 
         if video_label:
             video_label.imgtk = imgtk
