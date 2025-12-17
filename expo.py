@@ -135,55 +135,80 @@ def start_camera():
 
 
 # ---------- TKINTER GUI ----------
+import tkinter as tk
+
 root = tk.Tk()
 root.title("PERSONNEL DETECTION SECURITY SYSTEM")
-root.geometry("420x330")
 root.configure(bg="#1e1e1e")
 
+# Fullscreen size (already working for you)
+root.update_idletasks()
+sw, sh = root.winfo_screenwidth(), root.winfo_screenheight()
+root.geometry(f"{sw}x{sh}+0+0")
+
+# ------------------ OUTER FRAME (FULL WINDOW) ------------------
+outer = tk.Frame(root, bg="#1e1e1e")
+outer.pack(expand=True, fill="both")
+
+# ------------------ CENTER FRAME ------------------
+center = tk.Frame(outer, bg="#1e1e1e")
+center.pack(expand=True)
+
+# ------------------ RESPONSIVE SIZES ------------------
+TITLE_FONT_SIZE = int(sh * 0.04)     # ~4% of screen height
+BUTTON_FONT_SIZE = int(sh * 0.022)
+BUTTON_WIDTH = int(sw * 0.035)       # ~50% screen width
+
+# ------------------ TITLE ------------------
 tk.Label(
-    root,
+    center,
     text="PERSONNEL DETECTION SYSTEM",
     fg="white",
     bg="#1e1e1e",
-    font=("Arial", 14, "bold")
-).pack(pady=15)
+    font=("Segoe UI", TITLE_FONT_SIZE, "bold")
+).pack(pady=(20, 60))
 
+# ------------------ BUTTONS ------------------
 tk.Button(
-    root,
+    center,
     text="Upload Image",
     command=upload_image,
-    width=30,
+    width=BUTTON_WIDTH,
     height=2,
     bg="#007acc",
     fg="white",
-    font=("Arial", 10, "bold")
-).pack(pady=10)
+    font=("Segoe UI", BUTTON_FONT_SIZE, "bold"),
+    bd=0
+).pack(pady=20)
 
 tk.Button(
-    root,
+    center,
     text="Start the search",
     command=start_camera,
-    width=30,
+    width=BUTTON_WIDTH,
     height=2,
     bg="#28a745",
     fg="white",
-    font=("Arial", 10, "bold")
-).pack(pady=10)
+    font=("Segoe UI", BUTTON_FONT_SIZE, "bold"),
+    bd=0
+).pack(pady=20)
 
+# ------------------ STATUS ------------------
 status_label = tk.Label(
-    root,
+    center,
     text="System Ready",
     fg="cyan",
     bg="#1e1e1e",
-    font=("Arial", 10)
+    font=("Segoe UI", int(sh * 0.018))
 )
-status_label.pack(pady=10)
+status_label.pack(pady=(50, 10))
 
 tk.Label(
-    root,
+    center,
     text="Press Q to stop camera",
     fg="gray",
-    bg="#1e1e1e"
+    bg="#1e1e1e",
+    font=("Segoe UI", int(sh * 0.014))
 ).pack()
 
 root.mainloop()
